@@ -1,5 +1,7 @@
+//设置使用android插件构建项目
 apply plugin: 'com.android.application'
 
+//设置编译android项目的参数
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -11,15 +13,65 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    //签名配置
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+        }
+
+        myConfig {
+            storeFile file("other.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
+//    //输出不同配置的应用
+//    productFlavors {
+//        flavor1 {
+//            packageName "com.example.flavor1"
+//            versionCode 20
+//        }
+//
+//        flavor2 {
+//            packageName "com.example.flavor2"
+//            minSdkVersion 14
+//        }
+//    }
+
+    //代码混淆设置
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+
+        main {
+            java {
+                srcDir 'src/java'
+            }
+            resources {
+                srcDir 'src/resources'
+            }
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+//    依赖配置
+//    compile files('libs/foo.jar')   //单个文件
+    compile fileTree(dir: 'libs', include: ['*.jar'])  //多个文件
+
     compile 'com.android.support:appcompat-v7:22.0.0'
+//    compile 'com.google.guava:guava:11.0.2' 远程项目依赖
 }
