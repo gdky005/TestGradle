@@ -3,4 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="system_name">这是我发布的包哦！你测试通过了么？</string>
 </resources>
